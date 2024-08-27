@@ -65,6 +65,7 @@ function mostrarDetallesDepartamento(departamento) {
   const detallesPage = "Details.html";
   const parametros = `?nombre=${departamento.name}&descripcion=${departamento.description}&id=${departamento.id}`;
   window.location.href = detallesPage + parametros;
+  
 }
 
 const inputSearch = document.getElementById('search');
@@ -72,12 +73,18 @@ const inputSearch = document.getElementById('search');
 inputSearch.addEventListener('input', () => {
   const textoIngresado = inputSearch.value.toLowerCase();
   const tarjetas = document.querySelectorAll('.card');
+  let coincidencia = false;
   tarjetas.forEach(tarjeta => {
     const nombreDepartamento = tarjeta.querySelector('.card-title').textContent.toLowerCase();
     if (nombreDepartamento.includes(textoIngresado)) {
       tarjeta.style.display = 'block';
+      coincidencia = true;
     } else {
       tarjeta.style.display = 'none';
     }
   });
+
+  if (!coincidencia && textoIngresado !== '') {
+    alert('La información proporcionada es incorrecta');
+  }
 });
