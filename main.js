@@ -1,6 +1,7 @@
 let url = "https://api-colombia.com/"
 let urlFinal = url + "/api/v1/Country/Colombia"
 
+
 fetch(urlFinal)
 .then(response => response.json())
 .then(res => {
@@ -39,12 +40,14 @@ function mostrarTarjetasDepartamentos(departamentos) {
     botonDetalles.classList.add("btn", "btn-primary");
     botonDetalles.addEventListener("click", () => {
       mostrarDetallesDepartamento(departamento);
+
     });
     card.appendChild(imagen);
     card.appendChild(titulo);
     card.appendChild(descripcion);
     card.appendChild(botonDetalles);
     contenedor.appendChild(card);
+    
   });
 
 }
@@ -63,3 +66,18 @@ function mostrarDetallesDepartamento(departamento) {
   const parametros = `?nombre=${departamento.name}&descripcion=${departamento.description}&id=${departamento.id}`;
   window.location.href = detallesPage + parametros;
 }
+
+const inputSearch = document.getElementById('search');
+
+inputSearch.addEventListener('input', () => {
+  const textoIngresado = inputSearch.value.toLowerCase();
+  const tarjetas = document.querySelectorAll('.card');
+  tarjetas.forEach(tarjeta => {
+    const nombreDepartamento = tarjeta.querySelector('.card-title').textContent.toLowerCase();
+    if (nombreDepartamento.includes(textoIngresado)) {
+      tarjeta.style.display = 'block';
+    } else {
+      tarjeta.style.display = 'none';
+    }
+  });
+});

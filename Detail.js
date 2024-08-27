@@ -64,12 +64,10 @@ fetch(`https://api-colombia.com/api/v1/Department/${idDepartamento}/cities`)
     const params = new URLSearchParams();
 params.set('data', JSON.stringify(data));
 
-// Crea un enlace con los parámetros de URL
 const link = document.createElement('a');
 link.href = `Especies_invasoras.html?${params.toString()}`;
 link.textContent = 'Especies invasoras';
 
-// Agrega el enlace a la página
 document.body.appendChild(link);
     console.log(data);
    
