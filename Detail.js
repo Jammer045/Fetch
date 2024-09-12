@@ -68,7 +68,7 @@ function mostrarItemsFiltrados(searchTerm, showCitiesOnly, showNaturalAreasOnly)
 }
 
 function fetchData() {
-  const idDepartamento = 1; // Asegúrate de definir o asignar `idDepartamento` correctamente
+  const idDepartamento = 1;
 
   return Promise.all([
     fetch(`https://api-colombia.com/api/v1/Department/${idDepartamento}/cities`).then(response => response.json()),

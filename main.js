@@ -25,7 +25,7 @@ async function crearTarjetasDepartamentos() {
 
 function mostrarTarjetasDepartamentos(departamentos) {
   const contenedor = document.getElementById("contenedor");
-  contenedor.innerHTML = ''; // Limpiar el contenedor antes de mostrar las tarjetas
+  contenedor.innerHTML = '';
   departamentos.forEach((departamento) => {
     const card = document.createElement("div");
     card.classList.add("card");

@@ -8,9 +8,9 @@
 
 .card img {
     width: 100%;
-    height: 150px; /* ajusta el alto de la imagen */
-    object-fit: cover; /* ajusta la imagen para que se vea completa */
-    border-radius: 10px 10px 0 0; /* agrega un borde redondeado en la parte superior */
+    height: 150px;
+    object-fit: cover; 
+    border-radius: 10px 10px 0 0; 
     max-height: 15rem;
   overflow: hidden;
   }
