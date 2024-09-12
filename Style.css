@@ -59,3 +59,9 @@ table.table img {
     margin: 50px;
     text-align: center;
   }
+
+  #container-fluid {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
