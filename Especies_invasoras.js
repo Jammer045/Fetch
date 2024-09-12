@@ -1,22 +1,42 @@
-const params = new URLSearchParams(window.location.search);
-const data = JSON.parse(params.get('data'));
-console.log(data);
 
-const table = document.getElementById('especies-invasoras');
-const row = table.insertRow();
-const idCell = row.insertCell();
-const nombreCell = row.insertCell();
-const nombreScientificoCell = row.insertCell();
-const impactoCell = row.insertCell();
-const manejoCell = row.insertCell();
-const riesgoCell = row.insertCell();
-const urlimgCell = row.insertCell();
+const url = 'https://api-colombia.com/api/v1'
 
-idCell.textContent = data.id;
-nombreCell.textContent = data.name;
-nombreScientificoCell.textContent = data.scientificName;
-nombreScientificoCell.textContent = data.scientificName;
-impactoCell.textContent = data.impact;
-manejoCell.textContent = data.manage;
-riesgoCell.textContent = data.riskLevel;
-urlimgCell.textContent = data.urlImage;
+// Función para cargar las especies invasoras y mostrarlas en la tabla
+function desplegarEspeciesInv() {
+    fetch(`https://api-colombia.com/api/v1/InvasiveSpecie`)
+        .then(response => response.json())
+        .then(especies => {
+            const tabla = document.getElementById('especies-invasoras')
+            especies.forEach(especie => {
+                const fila = document.createElement('tr')
+               
+
+                // Asignar color a la fila según el nivel de riesgo
+                if (especie.riskLevel === 1) {
+                    fila.classList.add('fondo-azul');
+                } else if (especie.riskLevel === 2) {
+                    fila.classList.add('fondo-verde')
+                }
+
+                // Crear las celdas con la información de la especie
+                fila.innerHTML = `
+                    <td>${especie.name || 'Nombre no disponible'}</td>
+                    <td>${especie.scientificName || 'Nombre científico no disponible'}</td>
+                    <td>${especie.impact || 'Impacto no disponible'}</td>
+                    <td>${especie.manage || 'Manejo no disponible'}</td>
+                    <td class = "numero">${especie.riskLevel || 0}</td>
+                    <td><img src="${especie.urlImage}"></td>
+                `
+                
+                // Añadir la fila a la tabla
+                tabla.appendChild(fila)
+            })
+        })
+        .catch(error => {
+            console.error('Error al cargar las especies invasoras:', error)
+            document.getElementById('tablaContainer').innerHTML = '<p>Error al cargar las especies invasoras.</p>'
+        })
+}
+
+// Llamar a la función para cargar las especies al cargar la página
+document.addEventListener('DOMContentLoaded', desplegarEspeciesInv)
